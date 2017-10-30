@@ -1,6 +1,6 @@
-package com.tw.metadata;
+package com.tw.metadata.util;
 
-import io.swagger.codegen.examples.ExampleGenerator;
+import com.tw.metadata.exception.NotSupportedMediaTypeException;
 import io.swagger.models.Model;
 import io.swagger.models.ModelImpl;
 import io.swagger.models.properties.*;
@@ -18,7 +18,7 @@ import static io.swagger.models.properties.StringProperty.Format.URL;
  * Created by pzzheng on 10/27/17.
  */
 public class MyExampleGenerator {
-    private static final Logger logger = LoggerFactory.getLogger(ExampleGenerator.class);
+    private static final Logger logger = LoggerFactory.getLogger(MyExampleGenerator.class);
 
     // TODO: move constants to more appropriate location
     private static final String MIME_TYPE_JSON = "application/json";
@@ -35,7 +35,7 @@ public class MyExampleGenerator {
     public MyExampleGenerator(Map<String, Model> examples) {
         this.examples = examples;
         // use a fixed seed to make the "random" numbers reproducible.
-        this.random = new Random("com.tw.metadata.MyExampleGenerator".hashCode());
+        this.random = new Random("com.tw.metadata.util.MyExampleGenerator".hashCode());
     }
 
     public Optional<Object> resolvePropertyToExample(Map<String, Object> examples, List<String> mediaTypes, Property property) {
