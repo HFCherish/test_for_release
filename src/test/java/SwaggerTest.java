@@ -55,8 +55,8 @@ public class SwaggerTest {
         BodyParameter bodyParameter = (BodyParameter) petstore_d_swagger.getPaths().get("/pet").getPut().getParameters().get(0);
         Model requestSchema = bodyParameter.getSchema();
         Object o = exampleGenerator.resolveModelToExample(mediatype, requestSchema, Collections.emptySet());
-        System.out.println("********************* request ********************");
-        System.out.println(new ObjectMapper().writeValueAsString(o));
+        TestHelper.TEST_LOG.debug("********************* request ********************");
+        TestHelper.TEST_LOG.debug(new ObjectMapper().writeValueAsString(o));
 
 //      response schema and example
         Response response = petstore_d_swagger.getPath("/pet/findByStatus").getGet().getResponses().get("200");
@@ -64,8 +64,8 @@ public class SwaggerTest {
         Map<String, Object> responseExamples = response.getExamples();
         Optional<Object> example = exampleGenerator.resolvePropertyToExample(responseExamples, ImmutableList.of(mediatype), responseSchema);
 
-        System.out.println("********************* response ********************");
-        System.out.println(example.get());
+        TestHelper.TEST_LOG.debug("********************* response ********************");
+        TestHelper.TEST_LOG.debug(example.get());
     }
 
     private Swagger getSwagger(File petstore1_file, SwaggerParser swaggerParser) throws IOException {

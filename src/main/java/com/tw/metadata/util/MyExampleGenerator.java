@@ -5,8 +5,8 @@ import io.swagger.models.Model;
 import io.swagger.models.ModelImpl;
 import io.swagger.models.properties.*;
 import io.swagger.util.Json;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -18,7 +18,7 @@ import static io.swagger.models.properties.StringProperty.Format.URL;
  * Created by pzzheng on 10/27/17.
  */
 public class MyExampleGenerator {
-    private static final Logger logger = LoggerFactory.getLogger(MyExampleGenerator.class);
+    private static final Logger logger = LogManager.getLogger(MyExampleGenerator.class);
 
     // TODO: move constants to more appropriate location
     private static final String MIME_TYPE_JSON = "application/json";
@@ -92,7 +92,7 @@ public class MyExampleGenerator {
     }
 
     private Object resolvePropertyToExample(String propertyName, String mediaType, Property property, Set<String> processedModels) {
-        logger.debug("Resolving example for property {}...", property);
+        logger.debug("Resolving example for property {}...", Json.pretty(property));
         if (property.getExample() != null) {
             logger.debug("Example set in swagger spec, returning example: '{}'", property.getExample().toString());
             return property.getExample();
