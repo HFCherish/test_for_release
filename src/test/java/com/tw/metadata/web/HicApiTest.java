@@ -16,6 +16,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 
 /**
  * Created by pzzheng on 10/30/17.
@@ -41,6 +43,7 @@ public class HicApiTest {
                 .post("/api-specs")
 
                 .then()
-                .statusCode(201);
+                .statusCode(201)
+                .body("data", is(notNullValue()));
     }
 }

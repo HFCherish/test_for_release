@@ -14,6 +14,7 @@ import java.io.*;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Scanner;
 
 /**
  * Created by pzzheng on 10/30/17.
@@ -45,7 +46,14 @@ public class SwaggerTest {
 
 //        write to petstore_d
         Runtime runtime = Runtime.getRuntime();
-        runtime.exec(String.format("swagger bundle -r %s -o %s", petstore1, petstore_d)).waitFor();
+        Process exec = runtime.exec(String.format("swagger bundle -r %s -o %s", petstore1, petstore_d));
+        int i = exec.waitFor();
+        System.out.println("********************* waitfor: " + i);
+        InputStream errorStream = exec.getErrorStream();
+        if(errorStream.available() > 0) {
+            System.out.println(new Scanner(errorStream).nextLine());
+        }
+
 
         Swagger petstore_d_swagger = getSwagger(petstore_d_file, swaggerParser);
 
